@@ -1,0 +1,390 @@
+/* ========== Base Styles ========== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background-size: 300% 300%;
+  animation: gradientBG 15s ease infinite;
+  overflow-x: hidden;
+  color: #e0e0e0;
+  text-align: center;
+}
+
+/* Smooth gradient animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ========== Headings ========== */
+h1 {
+  font-size: 3.2em;
+  margin-top: 30px;
+  color: #c9e6f5;
+  text-shadow: 0 0 15px rgba(0,255,255,0.8), 0 0 30px rgba(0,200,255,0.5);
+  animation: neonGlow 2s infinite alternate;
+  letter-spacing: 2px;
+}
+
+@keyframes neonGlow {
+  from { text-shadow: 0 0 10px #00f5ff, 0 0 20px #00cfff; }
+  to { text-shadow: 0 0 25px #00e1ff, 0 0 40px #00aaff; }
+}
+
+/* ========== Gallery ========== */
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;   /* allows wrapping if needed */
+  margin: 40px 0;
+}
+
+.gallery img {
+  width: 22%;             /* relative size */
+  min-width: 150px;       /* don’t shrink too small */
+  max-width: 280px;       /* limit on big screens */
+  height: auto;           /* keep proportions */
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
+  cursor: pointer;
+  filter: brightness(0.85) saturate(1.1);
+}
+
+.gallery img:hover {
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 15px 40px rgba(0, 255, 255, 0.4);
+  filter: brightness(1.05) saturate(1.2);
+}
+
+/* ========== Message Box ========== */
+.message {
+  font-size: 1.3em;
+  max-width: 750px;
+  margin: 30px auto;
+  padding: 25px 30px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  animation: fadeInUp 2s ease;
+  line-height: 1.6;
+  color: #d4e9f7;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== Footer ========== */
+footer {
+  margin-top: 40px;
+  font-size: 1.1em;
+  opacity: 0.7;
+  color: #b0dfea;
+  animation: fadeIn 3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========== Balloons ========== */
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  border-radius: 50%;
+  animation: floatUp 14s linear infinite;
+  opacity: 0.85;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6));
+}
+
+/* Add string */
+.balloon::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 2px;
+  height: 45px;
+  background: rgba(255,255,255,0.3);
+  transform: translateX(-50%);
+}
+
+/* Floating animation */
+@keyframes floatUp {
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to { transform: translateY(-120vh) scale(1.05); opacity: 0; }
+}
+
+/* Balloon Variations */
+.balloon.small { width: 40px; height: 55px; animation-duration: 11s; }
+.balloon.medium { width: 60px; height: 80px; animation-duration: 14s; }
+.balloon.large { width: 85px; height: 110px; animation-duration: 18s; }
+
+/* Peaceful color palette for balloons */
+.balloon.c1 { background: radial-gradient(circle, #6dd5ed, #2193b0); }
+.balloon.c2 { background: radial-gradient(circle, #a1c4fd, #c2e9fb); }
+.balloon.c3 { background: radial-gradient(circle, #d4fc79, #96e6a1); }
+.balloon.c4 { background: radial-gradient(circle, #84fab0, #8fd3f4); }
+.balloon.c5 { background: radial-gradient(circle, #e0c3fc, #8ec5fc); }
+
+/* ===== Modal Styles ===== */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 80%;
+  max-height: 80%;
+  animation: zoomIn 0.6s ease;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0,255,255,0.5);
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+
+.modal-caption {
+  margin-top: 15px;
+  color: #c9e6f5;
+  font-size: 1.2em;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 2.5em;
+  color: #fff;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-shadow: 0 0 10px #00e1ff, 0 0 20px #00aaff;
+}
+
+.close-btn:hover {
+  transform: scale(1.2) rotate(10deg);
+  color: #00f5ff;
+}
+
+/* ================== RESPONSIVE DESIGN ================== */
+
+/* For tablets */
+@media (max-width: 1024px) {
+  h1 { font-size: 2.5em; }
+  .gallery img { width: 30%; }  /* 3 per row */
+  .message { font-size: 1.1em; padding: 20px; }
+}
+
+/* For mobile */
+@media (max-width: 768px) {
+  h1 { font-size: 2em; margin: 15px; }
+  .gallery img { width: 45%; }  /* 2 per row */
+  .message { font-size: 1em; max-width: 95%; padding: 18px; }
+  footer { font-size: 1em; }
+  .modal-content { max-width: 90%; max-height: 70%; }
+  .modal-caption { font-size: 1em; padding: 0 10px; }
+  .close-btn { top: 10px; right: 10px; font-size: 2em; }
+}
+
+/* For very small phones */
+@media (max-width: 480px) {
+  h1 { font-size: 1.6em; line-height: 1.4; }
+  .gallery img { width: 90%; }  /* 1 per row */
+  .message { font-size: 0.95em; padding: 15px; }
+  .modal-caption { font-size: 0.9em; }
+}
+/* ================== Global Styles ================== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+  overflow-x: hidden;
+}
+
+/* Animated Gradient Background */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-top: 40px;
+  color: #00ffe5;
+  text-shadow: 0 0 15px rgba(0, 255, 229, 0.7), 0 0 30px rgba(0, 200, 200, 0.5);
+  animation: glowPulse 3s infinite ease-in-out;
+}
+
+/* Title Glow Animation */
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 0 0 15px rgba(0, 255, 229, 0.7), 0 0 30px rgba(0, 200, 200, 0.5); }
+  50% { text-shadow: 0 0 25px rgba(0, 255, 229, 1), 0 0 50px rgba(0, 255, 255, 0.9); }
+}
+
+/* ================== Gallery ================== */
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin: 50px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.gallery img {
+  width: 22%;
+  min-width: 160px;
+  max-width: 280px;
+  border-radius: 20px;
+  height: auto;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6), 0 0 20px rgba(0,255,229,0.2);
+  transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
+  cursor: pointer;
+}
+
+.gallery img:hover {
+  transform: scale(1.08) rotate(-1deg);
+  box-shadow: 0 18px 45px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0,255,200,0.5);
+  filter: brightness(1.1) saturate(1.2);
+}
+
+/* ================== Message Section ================== */
+.message {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4), inset 0 0 30px rgba(0,255,229,0.1);
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #f0faff;
+}
+
+/* ================== Modal ================== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.modal-content {
+  max-width: 85%;
+  max-height: 70%;
+  border-radius: 20px;
+  box-shadow: 0 0 35px rgba(0,255,255,0.6);
+  animation: popIn 0.5s ease forwards;
+}
+
+/* Modal Animation */
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-caption {
+  margin-top: 18px;
+  font-size: 1.1em;
+  color: #d1ffff;
+  text-shadow: 0 0 10px rgba(0,255,255,0.4);
+}
+
+.close-btn {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  color: #00ffe5;
+  font-size: 2.5em;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+  color: #ff4081;
+}
+
+/* ================== Footer ================== */
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+  font-size: 1.1em;
+  color: #a8f9ff;
+  text-shadow: 0 0 10px rgba(0,255,255,0.5);
+}
+
+/* ================== Responsive ================== */
+@media (max-width: 1024px) {
+  .gallery img { width: 30%; }
+}
+
+@media (max-width: 768px) {
+  h1 { font-size: 2.2em; }
+  .gallery img { width: 45%; }
+  .message { font-size: 1em; padding: 20px; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.8em; line-height: 1.4; }
+  .gallery img { width: 90%; }
+  .message { font-size: 0.95em; padding: 15px; }
+  .modal-caption { font-size: 0.9em; }
+}

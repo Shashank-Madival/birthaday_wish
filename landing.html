@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Special Gift for Nagashree 🎁</title>
+  <style>
+    /* --- Body & Gradient Background --- */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d0d1a, #1a1a2e, #16213e, #0f3460);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* --- Container --- */
+    .container {
+      position: relative;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.55);
+      padding: 50px;
+      border-radius: 25px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 6px #ff4081;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff4081; }
+      to { text-shadow: 0 0 25px #f50057; }
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      color: #ffecec;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.3em;
+      color: #fff;
+      background: linear-gradient(45deg, #ff4081, #f50057);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
+
+    /* --- Stars & Fireflies --- */
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.7;
+      width: 3px;
+      height: 3px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* --- Moon --- */
+    .moon {
+      position: absolute;
+      top: 50px;
+      right: 50px;
+      width: 100px;
+      height: 100px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg') no-repeat center/cover;
+      border-radius: 50%;
+      box-shadow: 0 0 30px #fff, 0 0 60px #dbe6ff;
+      animation: moonGlow 6s ease-in-out infinite alternate;
+      z-index: 5;
+    }
+
+    @keyframes moonGlow {
+      from { box-shadow: 0 0 20px #fff, 0 0 40px #dbe6ff; }
+      to { box-shadow: 0 0 40px #fff, 0 0 80px #dbe6ff; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Glowing Moon -->
+  <div class="moon"></div>
+
+  <!-- Single container -->
+  <div class="container">
+    <h1>💖 A Special Surprise for You, Nagashree 💖</h1>
+    <p>Click the button below to open your birthday gift 🎂🎉</p>
+    <button onclick="openGift()">🎀 Open Your Gift 🎀</button>
+  </div>
+
+  <script>
+    function openGift() {
+      window.location.href = "index.html"; // Main birthday page
+    }
+
+    // --- Static Stars ---
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      const size = Math.random() * 2 + 1;
+      star.style.width = star.style.height = size + 'px';
+      star.style.opacity = Math.random() * 0.5 + 0.5;
+      document.body.appendChild(star);
+    }
+
+    // --- Fireflies with motion trails ---
+    const numFireflies = 20;
+    const fireflies = [];
+
+    for (let i = 0; i < numFireflies; i++) {
+      const firefly = document.createElement('div');
+      firefly.classList.add('star');
+      firefly.style.background = 'cyan';
+      firefly.style.opacity = 0.8;
+      const size = Math.random() * 4 + 2;
+      firefly.style.width = firefly.style.height = size + 'px';
+      firefly.x = Math.random() * window.innerWidth;
+      firefly.y = Math.random() * window.innerHeight;
+      firefly.vx = (Math.random() - 0.5) * 0.8;
+      firefly.vy = (Math.random() - 0.5) * 0.8;
+      firefly.trail = [];
+      document.body.appendChild(firefly);
+      fireflies.push(firefly);
+    }
+
+    function animate() {
+      fireflies.forEach(f => {
+        // store trail positions
+        f.trail.push({x: f.x, y: f.y});
+        if (f.trail.length > 5) f.trail.shift();
+
+        // move firefly
+        f.x += f.vx;
+        f.y += f.vy;
+
+        // bounce edges
+        if (f.x < 0 || f.x > window.innerWidth) f.vx *= -1;
+        if (f.y < 0 || f.y > window.innerHeight) f.vy *= -1;
+
+        // render firefly and trail
+        f.style.top = f.y + 'px';
+        f.style.left = f.x + 'px';
+        f.style.boxShadow = f.trail.map((p,i) => 
+          `${p.x - f.x}px ${p.y - f.y}px ${2+i*2}px rgba(0,255,255,${0.2 + i*0.1})`
+        ).join(',');
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
